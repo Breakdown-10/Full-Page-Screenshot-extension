@@ -1,0 +1,37 @@
+{
+    "name": "full-page-screenshot-extension",
+    "version": "1.0.0",
+    "description": "Chrome extension for capturing full-page screenshots in HD quality with PNG, JPG, and PDF support",
+    "main": "background.js",
+    "scripts": {
+      "build": "echo 'No build process required for this extension'",
+      "test": "echo 'Manual testing required - load extension in Chrome developer mode'",
+      "lint": "echo 'Please use ESLint for code linting'"
+    },
+    "keywords": [
+      "chrome-extension",
+      "screenshot",
+      "full-page",
+      "png",
+      "jpg",
+      "pdf",
+      "capture",
+      "web-scraping"
+    ],
+    "author": "Tahakhan",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/yourusername/screenshot-extension"
+    },
+    "bugs": {
+      "url": "https://github.com/yourusername/screenshot-extension/issues"
+    },
+    "homepage": "https://github.com/yourusername/screenshot-extension#readme",
+    "devDependencies": {
+      "eslint": "^8.0.0"
+    },
+    "engines": {
+      "node": ">=14.0.0"
+    }
+  }

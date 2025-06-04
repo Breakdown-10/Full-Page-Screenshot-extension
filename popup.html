@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            width: 320px;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            color: white;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
+            margin: 0 0 20px 0;
+            font-size: 18px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .format-group {
+            margin-bottom: 20px;
+        }
+        
+        .format-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .format-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .format-btn {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+            text-align: center;
+            min-width: 60px;
+        }
+        
+        .format-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .format-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .quality-group {
+            margin-bottom: 20px;
+        }
+        
+        .quality-slider {
+            width: 100%;
+            margin: 10px 0;
+            accent-color: white;
+        }
+        
+        .quality-value {
+            text-align: center;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .capture-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .capture-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .capture-btn:active {
+            transform: translateY(0);
+        }
+        
+        .capture-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 15px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .loading {
+            display: none;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .spinner {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 2px solid white;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.4);
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 Screenshot Capture</h1>
+        
+        <div class="warning">
+            ⚠️ This extension captures visible content only. Some sites may restrict screenshots due to privacy policies.
+        </div>
+        
+        <div class="format-group">
+            <label>Output Format:</label>
+            <div class="format-options">
+                <div class="format-btn active" data-format="png">PNG</div>
+                <div class="format-btn" data-format="jpg">JPG</div>
+                <div class="format-btn" data-format="pdf">PDF</div>
+            </div>
+        </div>
+        
+        <div class="quality-group">
+            <label>Quality:</label>
+            <input type="range" class="quality-slider" min="0.1" max="1.0" step="0.1" value="0.9" id="qualitySlider">
+            <div class="quality-value" id="qualityValue">90%</div>
+        </div>
+        
+        <button class="capture-btn" id="captureBtn">
+            📷 Capture Full Page
+        </button>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div>Capturing screenshot...</div>
+        </div>
+        
+        <div class="status" id="status"></div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

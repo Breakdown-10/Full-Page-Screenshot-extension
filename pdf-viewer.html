@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>PDF Preview</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .preview-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .screenshot {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #545b62;
+        }
+        
+        .instructions {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 6px;
+            padding: 15px;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        @media print {
+            body { margin: 0; padding: 0; background: white; }
+            .header, .actions, .instructions { display: none; }
+            .preview-container { box-shadow: none; margin: 0; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📄 PDF Preview</h1>
+        <p id="pageTitle">Screenshot Preview</p>
+    </div>
+    
+    <div class="preview-container">
+        <img id="screenshot" class="screenshot" alt="Screenshot">
+        
+        <div class="actions">
+            <button class="btn btn-primary" id="printBtn">🖨️ Save as PDF</button>
+            <button class="btn btn-secondary" id="downloadBtn">💾 Download Image</button>
+        </div>
+        
+        <div class="instructions">
+            <strong>To save as PDF:</strong>
+            <ol>
+                <li>Click "Save as PDF" button above</li>
+                <li>In the print dialog, select "Save as PDF" as destination</li>
+                <li>Choose your preferred settings and click "Save"</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataUrl = urlParams.get('data');
+            const title = urlParams.get('title') || 'Screenshot';
+            
+            if (dataUrl) {
+                document.getElementById('screenshot').src = decodeURIComponent(dataUrl);
+                document.getElementById('pageTitle').textContent = decodeURIComponent(title);
+                document.title = 'PDF Preview - ' + decodeURIComponent(title);
+            }
+            
+            document.getElementById('printBtn').addEventListener('click', function() {
+                window.print();
+            });
+            
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                const link = document.createElement('a');
+                link.href = decodeURIComponent(dataUrl);
+                link.download = title.replace(/[^a-z0-9\-_\s]/gi, '').replace(/\s+/g, '_') + '_screenshot.png';
+                link.click();
+            });
+        });
+    </script>
+</body>
+</html>
