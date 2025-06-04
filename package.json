@@ -22,12 +22,12 @@
     "license": "MIT",
     "repository": {
       "type": "git",
-      "url": "https://github.com/yourusername/screenshot-extension"
+      "url": "https://github.com/Breakdown-10/Full-Page-Screenshot-extension.git"
     },
     "bugs": {
-      "url": "https://github.com/yourusername/screenshot-extension/issues"
+      "url": "https://github.com/Breakdown-10/Full-Page-Screenshot-extension.git/issues"
     },
-    "homepage": "https://github.com/yourusername/screenshot-extension#readme",
+    "homepage": "https://github.com/Breakdown-10/Full-Page-Screenshot-extension.git#readme",
     "devDependencies": {
       "eslint": "^8.0.0"
     },
